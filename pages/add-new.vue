@@ -34,7 +34,7 @@ async function addNewFramework(){
   
   loading.value = true;
   
-  const response = await fetch('http://localhost:3000/add', {
+  const response = await fetch('/api/add', {
     method: 'post',
     body: {name, language, url, stars}
   });
