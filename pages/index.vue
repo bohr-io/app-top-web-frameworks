@@ -1,5 +1,5 @@
 <script setup>
-const response = await fetch('http://localhost:3000/frameworks');
+const response = await fetch('/api/frameworks');
 const { data } = await response.json();
 const { frameworks, address } = data;
 
