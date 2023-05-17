@@ -1,9 +1,11 @@
 <script setup>
+const addressResponse = await fetch('https://bohr.io/bohr_speed_address');
+const { address } = await addressResponse.json();
+
+console.log(address);
+
 const response = await fetch('/api/frameworks');
 const { frameworks } = await response.json();
-
-const addressFetch = await fetch('https://bohr.io/bohr_speed_address');
-const { address } = await addressFetch.json();
 
 const formatNumber = (val) => new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(val);
 
@@ -15,7 +17,7 @@ const formatNumber = (val) => new Intl.NumberFormat('en-US', { maximumSignifican
 
   <p
     class="text-center text-gray-400 italic"
-  >{{ address.city }}</p>
+  >{{ address?.city }}</p>
 
   <div class="overflow-x-auto rounded-lg border border-gray-200">
     <table class="min-w-full divide-y-2 divide-gray-200 text-sm">
