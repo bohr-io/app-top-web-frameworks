@@ -2,10 +2,11 @@
 const addressResponse = await fetch('https://bohr.io/bohr_speed_address');
 const { address } = await addressResponse.json();
 
-console.log(address);
-
 const response = await fetch('/api/frameworks');
-const { frameworks } = await response.json();
+const body = await response.json();
+const { frameworks } = body.data;
+
+//console.log(await response.text());
 
 const formatNumber = (val) => new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(val);
 
