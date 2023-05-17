@@ -1,5 +1,6 @@
 <script setup>
-const { data } = await useFetch('/api/frameworks');
+//const { data } = await useFetch('/api/frameworks');
+const { data } = await fetch('/api/frameworks');
 const { data: {frameworks, city}, message } = data.value;
 
 const formatNumber = (val) => new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(val);

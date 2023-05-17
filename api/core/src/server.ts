@@ -9,10 +9,6 @@ const client = createClient({
   authToken: "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQzMjU1NTMsImlkIjoiZmIxYTc2ODItZjRhYi0xMWVkLTkxZGQtMDIzNTBmN2M2OTc0In0.KS9kr3iZnBus8_d4ZbNNlfqf-6wbByYghShH3X4OsOQiXuZAh4z4ZYZ33Pmdxz1aVE1w2j6fHU53nxsqLvFQCA"
 });
 
-app.get("/", function (req: Request, res: Response) {
-  res.send("Turso Bohr template");
-});
-
 app.get("/frameworks", async function (req: Request, res: Response) {
   try {
     const rs = await client.execute("select * from frameworks");
@@ -23,7 +19,7 @@ app.get("/frameworks", async function (req: Request, res: Response) {
   }
 });
 
-app.get("/frameworks/:name", async function (req: Request, res: Response) {
+app.get("/:name", async function (req: Request, res: Response) {
   try {
     const rs = await client.execute({
       sql: "select * from frameworks where name = ?",
@@ -35,7 +31,7 @@ app.get("/frameworks/:name", async function (req: Request, res: Response) {
   }
 });
 
-app.post('/frameworks/add', async function (req: Request, res: Response) {
+app.post('/add', async function (req: Request, res: Response) {
   try {
     const { name, language, url, stars } = req.body;
 

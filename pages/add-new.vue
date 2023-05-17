@@ -34,7 +34,8 @@ async function addNewFramework(){
   
   loading.value = true;
   
-  const { error } = await useFetch('/api/add', {
+  //const { error } = await useFetch('/api/add', {
+  const { error } = await fetch('/api/add', {
     method: 'post',
     body: {name, language, url, stars}
   });
