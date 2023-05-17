@@ -14,7 +14,7 @@ const formatNumber = (val) => new Intl.NumberFormat('en-US', { maximumSignifican
   
   <h1 class="text-2xl font-bold text-center">Top Web Frameworks</h1>
 
-  <p class="text-center text-gray-400 italic" >{{ address?.city }}</p>
+  <p class="text-center text-gray-400 italic" >{{ address.city }}</p>
 
   <div class="overflow-x-auto rounded-lg border border-gray-200">
     <table class="min-w-full divide-y-2 divide-gray-200 text-sm">
