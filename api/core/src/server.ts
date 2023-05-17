@@ -11,7 +11,7 @@ const client = createClient({
 
 app.get("/frameworks", async function (req: Request, res: Response) {
   try {
-    const address = await fetch('https://bohr.io/bohr_speed_address');
+
 
     const rs = await client.execute("select * from frameworks");
     let data = {
