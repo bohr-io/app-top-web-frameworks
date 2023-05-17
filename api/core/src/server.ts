@@ -13,8 +13,11 @@ app.get("/frameworks", async function (req: Request, res: Response) {
   try {
     const rs = await client.execute("select * from frameworks");
     let data = {
-      frameworks: rs.rows,
-      city: "Maringá"
+      message: "Frameworks fetched!",
+      data: {
+        frameworks: rs.rows,
+        city: "Maringá"
+      }
     };
     res.send(data);
   } catch (e) {
