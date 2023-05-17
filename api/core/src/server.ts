@@ -43,12 +43,31 @@ app.post('/add', async function (req: Request, res: Response) {
   try {
     const { name, language, url, stars } = req.body;
 
+    if (!name || !language || !url || !stars) {
+      res.status(400)
+      res.render('error', {
+        message: "Missing fields!",
+        statusCode: 400
+      });
+    }
+
     await client.execute({
       sql: "insert into frameworks(name, language, url, stars) values(?, ?, ?, ?)",
       args: [
         name, language, url, stars,
       ]
     });
+
+    const framework = await client.execute({
+      sql: "select * from frameworks where url = ?",
+      args: [url]
+    })
+
+    let data = {
+      message: "Framework added!",
+      data: framework.rows
+    };
+    res.send(data);
     res.send({ "ok": true });
   } catch (e) {
     console.error(e);
