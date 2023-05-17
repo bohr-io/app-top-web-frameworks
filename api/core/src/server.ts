@@ -3,6 +3,7 @@ import { createClient } from "@libsql/client";
 
 var app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const client = createClient({
   url: process.env.NUXT_TURSO_DB_URL as string,
@@ -44,14 +45,15 @@ app.post('/add', async function (req: Request, res: Response) {
     const { name, language, url, stars } = req.body;
 
     if (!name || !language || !url || !stars) {
-      res.status(400)
-      res.render('error', {
+      res.status(400);
+      res.json({
         message: "Missing fields!",
         statusCode: 400
       });
+      return;
     }
 
-    await client.execute({
+    const response = await client.execute({
       sql: "insert into frameworks(name, language, url, stars) values(?, ?, ?, ?)",
       args: [
         name, language, url, stars,
@@ -70,6 +72,8 @@ app.post('/add', async function (req: Request, res: Response) {
     res.send(data);
     res.send({ "ok": true });
   } catch (e) {
+    res.status(400);
+    res.json(e);
     console.error(e);
   }
 });

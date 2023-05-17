@@ -36,7 +36,8 @@ async function addNewFramework(){
   
   const response = await fetch('/api/add', {
     method: 'post',
-    body: {name, language, url, stars}
+    body: JSON.stringify({name, language, url, stars}),
+    headers: { "Content-Type": "application/json" },
   });
   const { error } = await response.json();
   loading.value = false;
