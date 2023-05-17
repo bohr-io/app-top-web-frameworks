@@ -1,7 +1,7 @@
 <script setup>
-//const { data } = await useFetch('/api/frameworks');
-const { data } = await fetch('/api/frameworks');
-const { data: {frameworks, city}, message } = data.value;
+const response = await fetch('http://localhost:3000/frameworks');
+const { data } = await response.json();
+const { frameworks, address } = data;
 
 const formatNumber = (val) => new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(val);
 
@@ -13,7 +13,7 @@ const formatNumber = (val) => new Intl.NumberFormat('en-US', { maximumSignifican
 
   <p
     class="text-center text-gray-400 italic"
-  >{{ city }}</p>
+  >{{ address.city }}</p>
 
   <div class="overflow-x-auto rounded-lg border border-gray-200">
     <table class="min-w-full divide-y-2 divide-gray-200 text-sm">

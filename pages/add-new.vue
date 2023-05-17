@@ -34,11 +34,11 @@ async function addNewFramework(){
   
   loading.value = true;
   
-  //const { error } = await useFetch('/api/add', {
-  const { error } = await fetch('/api/add', {
+  const response = await fetch('http://localhost:3000/add', {
     method: 'post',
     body: {name, language, url, stars}
   });
+  const { error } = await response.json();
   loading.value = false;
   
   if(!error.value){

@@ -5,18 +5,20 @@ var app = express();
 app.use(express.urlencoded({ extended: true }));
 
 const client = createClient({
-  url: "libsql://bohr-willersonsp.turso.io",
-  authToken: "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQzMjU1NTMsImlkIjoiZmIxYTc2ODItZjRhYi0xMWVkLTkxZGQtMDIzNTBmN2M2OTc0In0.KS9kr3iZnBus8_d4ZbNNlfqf-6wbByYghShH3X4OsOQiXuZAh4z4ZYZ33Pmdxz1aVE1w2j6fHU53nxsqLvFQCA"
+  url: process.env.NUXT_TURSO_DB_URL as string,
+  authToken: process.env.NUXT_TURSO_DB_AUTH_TOKEN as string
 });
 
 app.get("/frameworks", async function (req: Request, res: Response) {
   try {
+    const address = await fetch('https://bohr.io/bohr_speed_address');
+
     const rs = await client.execute("select * from frameworks");
     let data = {
       message: "Frameworks fetched!",
       data: {
         frameworks: rs.rows,
-        city: "Maringá"
+        address: await address.json()
       }
     };
     res.send(data);
