@@ -2,8 +2,7 @@
 const addressResponse = await fetch('https://bohr.io/bohr_speed_address');
 const address = await addressResponse.json();
 
-//const response = await fetch('/api/frameworks');
-const response = await fetch('http://localhost:3000/frameworks');
+const response = await fetch('/api/frameworks');
 const body = await response.json();
 const { frameworks } = body.data;
 
