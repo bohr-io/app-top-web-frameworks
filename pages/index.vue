@@ -1,7 +1,9 @@
 <script setup>
 const response = await fetch('/api/frameworks');
-const { data } = await response.json();
-const { frameworks, address } = data;
+const { frameworks } = await response.json();
+
+const addressFetch = await fetch('https://bohr.io/bohr_speed_address');
+const { address } = await addressFetch.json();
 
 const formatNumber = (val) => new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(val);
 
