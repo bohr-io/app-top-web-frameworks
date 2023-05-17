@@ -39,10 +39,14 @@ async function addNewFramework(){
     body: JSON.stringify({name, language, url, stars}),
     headers: { "Content-Type": "application/json" },
   });
-  const { error } = await response.json();
+  
+  let js = await response.json();
+  console.log(js);
+
+  const { error } = js;
   loading.value = false;
   
-  if(!error.value){
+  if(!error?.value){
     status.message = "Thanks for your contribution";
     status.type = "success";
     form.name = ""

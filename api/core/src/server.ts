@@ -67,14 +67,21 @@ app.post('/add', async function (req: Request, res: Response) {
 
     let data = {
       message: "Framework added!",
-      data: framework.rows
+      data: framework.rows,
+      value: null
     };
     res.send(data);
-    res.send({ "ok": true });
-  } catch (e) {
-    res.status(400);
-    res.json(e);
-    console.error(e);
+  } catch (e: any) {
+    res.status(400).json({
+      error: {
+        value: {
+          data: {
+            message: e.message,
+            code: e.code
+          }
+        }
+      }
+    });
   }
 });
 
