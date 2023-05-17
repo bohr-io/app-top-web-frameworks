@@ -17,8 +17,7 @@ app.get("/frameworks", async function (req: Request, res: Response) {
     let data = {
       message: "Frameworks fetched!",
       data: {
-        frameworks: rs.rows,
-        address: await address.json()
+        frameworks: rs.rows
       }
     };
     res.send(data);
